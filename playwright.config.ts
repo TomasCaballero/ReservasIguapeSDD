@@ -1,5 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 
+if (!process.env.DATABASE_URL) {
+  process.loadEnvFile?.('.env');
+}
+
 export default defineConfig({
   testDir: './tests/e2e',
   timeout: 30000,

@@ -45,10 +45,11 @@ test.describe('US5: iCal Multi-Channel Sync and Privacy', () => {
   test('Admin categories-units page displays iCal modal and triggers manual sync', async ({ page }) => {
     // Login as admin
     await page.goto('/adminpanel/login');
-    await page.fill('input[type="email"]', 'admin@iguapeaparts.com');
-    await page.fill('input[type="password"]', 'Admin1234!');
-    await page.click('button[type="submit"]');
-    await page.waitForURL('/adminpanel');
+    await page.locator('input[type="email"]').fill('admin@iguapeaparts.com');
+    await page.locator('input[type="password"]').fill('AdminPassword123!');
+    await page.getByRole('button', { name: /iniciar sesión/i }).click();
+    await page.waitForURL(/\/adminpanel/);
+    await expect(page.locator('h1')).toContainText('Panel de Control PMS');
 
     // Go to categories & units
     await page.goto('/adminpanel/categories-units');

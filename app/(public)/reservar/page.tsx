@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useTransition } from 'react';
+import React, { useState, useEffect, useTransition, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { differenceInYears, format } from 'date-fns';
@@ -13,7 +13,7 @@ interface CompanionItem {
   birthDate: string;
 }
 
-export default function ReservarStep2Page() {
+function ReservarStep2Content() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -395,6 +395,7 @@ export default function ReservarStep2Page() {
                 </label>
                 <input
                   type="text"
+                  name="docNumber"
                   value={docNumber}
                   onChange={(e) => setDocNumber(e.target.value)}
                   placeholder="Sin puntos ni guiones"
@@ -562,5 +563,19 @@ export default function ReservarStep2Page() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function ReservarStep2Page() {
+  return (
+    <Suspense
+      fallback={
+        <div className="max-w-4xl mx-auto p-8 text-center text-[#E4E2C5]/70 italic">
+          Cargando formulario de reserva...
+        </div>
+      }
+    >
+      <ReservarStep2Content />
+    </Suspense>
   );
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import prisma from '@/lib/db/client';
 import { formatDateISO } from '@/lib/utils/date';
+import { UpcomingBirthdaysWidget } from './upcoming-birthdays-widget';
 
 export default async function AdminDashboardPage() {
   const [totalReservations, pendingReservations, unitsCount, categoriesCount] = await Promise.all([
@@ -107,6 +108,11 @@ export default async function AdminDashboardPage() {
           <p className="font-display text-4xl text-[#E4E2C5] mt-2">{categoriesCount}</p>
           <p className="text-[11px] text-[#E4E2C5]/60 mt-1">Tipologías activas</p>
         </div>
+      </div>
+
+      {/* CRM Upcoming Birthdays Widget (US6) */}
+      <div className="max-w-2xl">
+        <UpcomingBirthdaysWidget />
       </div>
     </div>
   );

@@ -205,18 +205,18 @@
 ### Tests for User Story 6 🧪
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T068 [P] [US6] Unit tests for guest document unicity, birthday window calculation (including Feb 29 non-leap year mapping), and irreversible anonymization in `tests/unit/guest-crm.test.ts`
-- [ ] T069 [P] [US6] Contract tests for CRM guest directory, upcoming birthdays, and anonymization execution in `tests/contract/admin-guests.test.ts`
+- [x] T068 [P] [US6] Unit tests for guest document unicity, birthday window calculation (including Feb 29 non-leap year mapping), and irreversible anonymization in `tests/unit/guest-crm.test.ts`
+- [x] T069 [P] [US6] Contract tests for CRM guest directory, upcoming birthdays, and anonymization execution in `tests/contract/admin-guests.test.ts`
 
 ### Implementation for User Story 6
 
-- [ ] T070 [P] [US6] Implement guest CRM repository service for paginated directory, stay history, and 30-day upcoming birthdays calculation in `lib/guests/crm.ts`
-- [ ] T071 [P] [US6] Implement irreversible guest and companion personal data anonymization service in `lib/guests/anonymization.ts`
-- [ ] T072 [US6] Implement route handlers `GET /api/admin/guests` and `GET /api/admin/guests/upcoming-birthdays` in `app/api/admin/guests/route.ts` and `app/api/admin/guests/upcoming-birthdays/route.ts`
-- [ ] T073 [US6] Implement route handler `POST /api/admin/guests/[id]/anonymize` in `app/api/admin/guests/[id]/anonymize/route.ts`
-- [ ] T074 [US6] Implement upcoming birthdays dashboard widget component in `app/adminpanel/upcoming-birthdays-widget.tsx`
-- [ ] T075 [US6] Implement CRM guests directory page with search, stay history drawer, and anonymization button in `app/adminpanel/guests/page.tsx`
-- [ ] T076 [US6] E2E test for guest CRM consolidation, birthdays widget, and anonymization flow in `tests/e2e/guest-crm.spec.ts`
+- [x] T070 [P] [US6] Implement guest CRM repository service for paginated directory, stay history, and 30-day upcoming birthdays calculation in `lib/guests/crm.ts`
+- [x] T071 [P] [US6] Implement irreversible guest and companion personal data anonymization service in `lib/guests/anonymization.ts`
+- [x] T072 [US6] Implement route handlers `GET /api/admin/guests` and `GET /api/admin/guests/upcoming-birthdays` in `app/api/admin/guests/route.ts` and `app/api/admin/guests/upcoming-birthdays/route.ts`
+- [x] T073 [US6] Implement route handler `POST /api/admin/guests/[id]/anonymize` in `app/api/admin/guests/[id]/anonymize/route.ts`
+- [x] T074 [US6] Implement upcoming birthdays dashboard widget component in `app/adminpanel/upcoming-birthdays-widget.tsx`
+- [x] T075 [US6] Implement CRM guests directory page with search, stay history drawer, and anonymization button in `app/adminpanel/guests/page.tsx`
+- [x] T076 [US6] E2E test for guest CRM consolidation, birthdays widget, and anonymization flow in `tests/e2e/guest-crm.spec.ts`
 
 **Checkpoint**: All user stories (1 through 6) complete and independently verified.
 
@@ -226,12 +226,12 @@
 
 **Purpose**: High-concurrency load verification, responsive and accessibility audits, style compliance audits, settings UI, and quickstart end-to-end validation.
 
-- [ ] T077 [P] Implement high-concurrency availability and soft lock load testing script under 20 workers (RNF-04) in `scripts/load-availability.ts`
-- [ ] T078 [P] Implement responsive layout and keyboard accessibility test across 360px to 1920px viewports (RNF-01, AC-102) in `tests/e2e/responsive-keyboard.spec.ts`
-- [ ] T079 [P] Implement visual style audit test validating brand palette (`#2B3D24`, `#E4E2C5`, `#E6EF73`), fonts, and straight corners (RNF-02) in `tests/e2e/style-audit.spec.ts`
-- [ ] T080 [P] Implement system settings configuration UI and route handler for operational limits in `app/adminpanel/settings/page.tsx` and `app/api/admin/settings/route.ts`
-- [ ] T081 Execute full validation against scenarios defined in `specs/001-motor-reservas-pms/quickstart.md`
-- [ ] T082 Run full verification gates (`npx tsc --noEmit`, `npx eslint .`, `npm test`, `npm run build`, `npx playwright test`)
+- [x] T077 [P] Implement high-concurrency availability and soft lock load testing script under 20 workers (RNF-04) in `scripts/load-availability.ts`
+- [x] T078 [P] Implement responsive layout and keyboard accessibility test across 360px to 1920px viewports (RNF-01, AC-102) in `tests/e2e/responsive-keyboard.spec.ts`
+- [x] T079 [P] Implement visual style audit test validating brand palette (`#2B3D24`, `#E4E2C5`, `#E6EF73`), fonts, and straight corners (RNF-02) in `tests/e2e/style-audit.spec.ts`
+- [x] T080 [P] Implement system settings configuration UI and route handler for operational limits in `app/adminpanel/settings/page.tsx` and `app/api/admin/settings/route.ts`
+- [x] T081 Execute full validation against scenarios defined in `specs/001-motor-reservas-pms/quickstart.md`
+- [x] T082 Run full verification gates (`npx tsc --noEmit`, `npx eslint .`, `npm test`, `npm run build`, `npx playwright test`)
 
 ---
 

@@ -78,6 +78,12 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             >
               <span>👥 CRM Huéspedes</span>
             </Link>
+            <Link
+              href="/adminpanel/settings"
+              className="flex items-center gap-3 px-3 py-2.5 hover:bg-[#3F5934] text-[#E4E2C5] hover:text-[#E6EF73] transition-colors"
+            >
+              <span>⚙️ Configuración</span>
+            </Link>
           </nav>
         </div>
 

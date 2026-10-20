@@ -1,17 +1,29 @@
 import { Pool } from 'pg';
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
+if (!process.env.DATABASE_URL) {
+  process.loadEnvFile?.('.env');
+}
+
+let pool: Pool | null = null;
+
+export function getPool(): Pool {
+  if (!pool || (pool as any).ending || (pool as any).ended) {
+    pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+    });
+  }
+  return pool;
+}
 
 export async function query<T = any>(text: string, params?: unknown[]): Promise<T[]> {
-  const result = await pool.query(text, params);
+  const currentPool = getPool();
+  const result = await currentPool.query(text, params);
   return result.rows as T[];
 }
 
 export async function cleanDb(): Promise<void> {
-  // Truncate non-master data tables to leave database clean between tests
-  await pool.query(`
+  const currentPool = getPool();
+  await currentPool.query(`
     TRUNCATE TABLE 
       "Payment",
       "Companion",
@@ -24,7 +36,10 @@ export async function cleanDb(): Promise<void> {
 }
 
 export async function endPool(): Promise<void> {
-  await pool.end();
+  if (pool && !(pool as any).ended && !(pool as any).ending) {
+    await pool.end();
+    pool = null;
+  }
 }
 
 export { pool };

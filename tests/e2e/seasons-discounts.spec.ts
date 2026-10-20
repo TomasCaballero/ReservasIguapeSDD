@@ -17,6 +17,7 @@ test.describe('Seasons & Discounts Management (US3)', () => {
     await page.locator('input[type="password"]').fill('AdminPassword123!');
     await page.getByRole('button', { name: /iniciar sesión/i }).click();
     await page.waitForURL(/\/adminpanel/);
+    await expect(page.locator('h1')).toContainText('Panel de Control PMS');
 
     // 2. Go to seasons-rates
     await page.goto('/adminpanel/seasons-rates');

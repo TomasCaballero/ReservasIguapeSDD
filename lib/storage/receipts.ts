@@ -52,7 +52,7 @@ export async function readReceiptFile(relativePath: string): Promise<Buffer | nu
   // Prevent path traversal
   const safePath = path.join(receiptsDir, path.basename(relativePath));
   try {
-    return await fs.readFile(safePath);
+    return await fs.readFile(/*turbopackIgnore: true*/ safePath);
   } catch {
     return null;
   }
