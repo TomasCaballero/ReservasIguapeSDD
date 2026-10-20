@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #E6EF73;
+  --color-primary-hover: #D4DD68;
+  --color-primary-active: #C2CB5D;
+  --color-background: #2B3D24;
+  --color-background-alt: #E4E2C5;
+  --color-background-card: #3F5934;
+  --color-text: #E4E2C5;
+  --color-text-muted: #AD9C78;
+  --color-text-dark: #1E2B18;
+  --color-border: #AD9C78;
+
+  --font-family-display: "DM Serif Display", serif;
+  --font-family-body: "Source Sans 3", sans-serif;
+
+  --radius-DEFAULT: 0rem;
+  --radius-lg: 0rem;
+  --radius-xl: 0rem;
+  --radius-full: 9999px;
+}
+
+:root {
+  --color-primary: #E6EF73;
+  --color-primary-hover: #D4DD68;
+  --color-primary-active: #C2CB5D;
+  --color-background: #2B3D24;
+  --color-background-alt: #E4E2C5;
+  --color-background-card: #3F5934;
+  --color-text: #E4E2C5;
+  --color-text-muted: #AD9C78;
+  --color-text-dark: #1E2B18;
+  --color-border: #AD9C78;
+}
+
+body {
+  font-family: var(--font-family-body, "Source Sans 3", sans-serif);
+  background-color: #2B3D24;
+  color: #E4E2C5;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-display, "DM Serif Display", serif);
+  font-weight: 400;
+}

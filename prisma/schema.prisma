@@ -1,0 +1,259 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+enum DocType {
+  DNI
+  PASSPORT
+  CI
+  OTHER
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  FINISHED
+}
+
+enum ReservationOrigin {
+  WEB_DIRECT
+  ADMIN_MANUAL
+  ICAL_EXTERNAL
+}
+
+enum Currency {
+  ARS
+  USD
+}
+
+enum OccupancyType {
+  RESERVATION
+  MANUAL_BLOCK
+  ICAL_BLOCK
+  SOFT_LOCK
+}
+
+enum OccupancyStatus {
+  ACTIVE
+  RELEASED
+}
+
+enum PaymentMethod {
+  TRANSFER_ARS
+  TRANSFER_USD
+  CASH_ARS
+  CASH_USD
+  MERCADO_PAGO
+  OTHER
+}
+
+enum AnonymizationStatus {
+  PENDING
+  COMPLETED
+  EXPIRED
+}
+
+model AdminUser {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  name         String
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("AdminUser")
+}
+
+model Category {
+  id               String         @id @default(uuid())
+  slug             String         @unique
+  name             String
+  description      String?
+  capacityAdults   Int            @map("capacity_adults")
+  capacityChildren Int            @default(0) @map("capacity_children")
+  maxOccupancy     Int            @map("max_occupancy")
+  basePriceArs     Decimal        @map("base_price_ars") @db.Decimal(12, 2)
+  basePriceUsd     Decimal        @map("base_price_usd") @db.Decimal(12, 2)
+  images           Json           @default("[]")
+  isActive         Boolean        @default(true) @map("is_active")
+  displayOrder     Int            @default(0) @map("display_order")
+  units            Unit[]
+  seasonPrices     SeasonPrice[]
+  reservations     Reservation[]
+
+  @@map("Category")
+}
+
+model Unit {
+  id              String          @id @default(uuid())
+  categoryId      String          @map("category_id")
+  category        Category        @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  name            String
+  icalFeedUrl     String?         @map("ical_feed_url")
+  icalExportToken String          @unique @map("ical_export_token")
+  isActive        Boolean         @default(true) @map("is_active")
+  notes           String?
+  occupancies     UnitOccupancy[]
+  reservations    Reservation[]
+
+  @@map("Unit")
+}
+
+model Season {
+  id            String        @id @default(uuid())
+  name          String
+  startDate     DateTime      @map("start_date") @db.Date
+  endDate       DateTime      @map("end_date") @db.Date
+  minStayNights Int           @default(1) @map("min_stay_nights")
+  isActive      Boolean       @default(true) @map("is_active")
+  seasonPrices  SeasonPrice[]
+
+  @@map("Season")
+}
+
+model SeasonPrice {
+  id         String   @id @default(uuid())
+  seasonId   String   @map("season_id")
+  season     Season   @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  categoryId String   @map("category_id")
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  priceArs   Decimal  @map("price_ars") @db.Decimal(12, 2)
+  priceUsd   Decimal  @map("price_usd") @db.Decimal(12, 2)
+
+  @@unique([seasonId, categoryId])
+  @@map("SeasonPrice")
+}
+
+model DiscountRule {
+  id              String  @id @default(uuid())
+  minNights       Int     @map("min_nights")
+  discountPercent Int     @map("discount_percent")
+  isActive        Boolean @default(true) @map("is_active")
+
+  @@map("DiscountRule")
+}
+
+model Guest {
+  id                    String                 @id @default(uuid())
+  docType               DocType                @map("doc_type")
+  docNumber             String                 @map("doc_number")
+  firstName             String                 @map("first_name")
+  lastName              String                 @map("last_name")
+  email                 String
+  phone                 String
+  birthDate             DateTime?              @map("birth_date") @db.Date
+  isAnonymized          Boolean                @default(false) @map("is_anonymized")
+  createdAt             DateTime               @default(now()) @map("created_at")
+  updatedAt             DateTime               @updatedAt @map("updated_at")
+  reservations          Reservation[]
+  anonymizationRequests AnonymizationRequest[]
+
+  @@unique([docType, docNumber])
+  @@map("Guest")
+}
+
+model Reservation {
+  id                  String            @id @default(uuid())
+  code                String            @unique
+  categoryId          String            @map("category_id")
+  category            Category          @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  unitId              String?           @map("unit_id")
+  unit                Unit?             @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  guestId             String            @map("guest_id")
+  guest               Guest             @relation(fields: [guestId], references: [id], onDelete: Restrict)
+  checkIn             DateTime          @map("check_in") @db.Date
+  checkOut            DateTime          @map("check_out") @db.Date
+  adults              Int
+  children            Int               @default(0)
+  currency            Currency
+  subtotal            Decimal           @db.Decimal(12, 2)
+  discountAmount      Decimal           @default(0) @map("discount_amount") @db.Decimal(12, 2)
+  totalPrice          Decimal           @map("total_price") @db.Decimal(12, 2)
+  status              ReservationStatus @default(PENDING)
+  origin              ReservationOrigin @default(WEB_DIRECT)
+  cancellationReason  String?           @map("cancellation_reason")
+  notes               String?
+  paymentMethodSentAt DateTime?         @map("payment_method_sent_at")
+  createdAt           DateTime          @default(now()) @map("created_at")
+  updatedAt           DateTime          @updatedAt @map("updated_at")
+  companions          Companion[]
+  payments            Payment[]
+  occupancies         UnitOccupancy[]
+
+  @@map("Reservation")
+}
+
+model Companion {
+  id            String       @id @default(uuid())
+  reservationId String       @map("reservation_id")
+  reservation   Reservation  @relation(fields: [reservationId], references: [id], onDelete: Cascade)
+  firstName     String       @map("first_name")
+  lastName      String       @map("last_name")
+  docType       DocType?     @map("doc_type")
+  docNumber     String?      @map("doc_number")
+  birthDate     DateTime?    @map("birth_date") @db.Date
+
+  @@map("Companion")
+}
+
+model UnitOccupancy {
+  id            String          @id @default(uuid())
+  unitId        String          @map("unit_id")
+  unit          Unit            @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  reservationId String?         @map("reservation_id")
+  reservation   Reservation?    @relation(fields: [reservationId], references: [id], onDelete: Cascade)
+  type          OccupancyType
+  checkIn       DateTime        @map("check_in") @db.Date
+  checkOut      DateTime        @map("check_out") @db.Date
+  lockToken     String?         @map("lock_token")
+  expiresAt     DateTime?       @map("expires_at")
+  status        OccupancyStatus @default(ACTIVE)
+  notes         String?
+
+  @@index([unitId, checkIn, checkOut])
+  @@index([lockToken])
+  @@map("UnitOccupancy")
+}
+
+model Payment {
+  id              String        @id @default(uuid())
+  reservationId   String        @map("reservation_id")
+  reservation     Reservation   @relation(fields: [reservationId], references: [id], onDelete: Cascade)
+  amount          Decimal       @db.Decimal(12, 2)
+  currency        Currency
+  paymentMethod   PaymentMethod @map("payment_method")
+  notes           String?
+  receiptPath     String?       @map("receipt_path")
+  receiptFilename String?       @map("receipt_filename")
+  receiptMime     String?       @map("receipt_mime")
+  receiptSize     Int?          @map("receipt_size")
+  createdAt       DateTime      @default(now()) @map("created_at")
+
+  @@map("Payment")
+}
+
+model AnonymizationRequest {
+  id          String              @id @default(uuid())
+  guestId     String              @map("guest_id")
+  guest       Guest               @relation(fields: [guestId], references: [id], onDelete: Restrict)
+  requestedAt DateTime            @default(now()) @map("requested_at")
+  deadlineAt  DateTime            @map("deadline_at")
+  completedAt DateTime?           @map("completed_at")
+  status      AnonymizationStatus @default(PENDING)
+
+  @@map("AnonymizationRequest")
+}
+
+model SystemSetting {
+  key         String  @id
+  value       String
+  description String?
+
+  @@map("SystemSetting")
+}
