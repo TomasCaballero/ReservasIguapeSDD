@@ -30,10 +30,10 @@ Usuario administrativo para gestión del PMS.
 - `updated_at`: `DateTime` (auto-update)
 
 ### 2. `Category`
-Tipología o tipo de departamento (ej. Classic, Superior, De Luxe).
+Tipología o tipo de apart (ej. Classic, Superior, De Luxe).
 - `id`: `UUID` (PK)
 - `slug`: `String(50)` (Unique, kebab-case, ej. `classic`, `superior`, `de-luxe`)
-- `name`: `String(100)` (ej. "Departamento Classic")
+- `name`: `String(100)` (ej. "Apart Classic")
 - `description`: `Text`
 - `capacity_adults`: `Int` (≥ 1)
 - `capacity_children`: `Int` (≥ 0)

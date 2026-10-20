@@ -3,7 +3,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Iguapé Aparts — Motor de Reservas',
-  description: 'Reservas directas en Iguapé Aparts. Complejo de departamentos y spa en la naturaleza.',
+  description: 'Reservas directas en Iguapé Aparts. Complejo de aparts y spa en la naturaleza.',
 };
 
 export default function RootLayout({

@@ -46,7 +46,7 @@ Guía rápida para levantar el entorno de desarrollo y validar los flujos críti
 ### Escenario A: Búsqueda y Reserva en Portal Público
 1. Acceder a `http://localhost:7777/`
 2. Seleccionar fechas: del 15 al 19 del mes próximo, 2 adultos.
-3. Verificar que se liste la categoría "Departamento Classic" con desglose de tarifas en ARS y USD.
+3. Verificar que se liste la categoría "Apart Classic" con desglose de tarifas en ARS y USD.
 4. Presionar "Reservar" e ingresar al formulario de datos:
    - Se activa el contador de *soft lock* de 15 minutos en pantalla.
    - Completar datos del titular y acompañante.

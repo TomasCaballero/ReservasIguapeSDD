@@ -19,9 +19,9 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
               />
             </div>
             <div>
-              <span className="font-display text-2xl tracking-wide text-[#E6EF73] block leading-none">
+              <p className="font-display text-2xl tracking-wide text-[#E6EF73] block leading-none">
                 IGUAPÉ
-              </span>
+              </p>
               <span className="text-xs tracking-widest text-[#E4E2C5]/80 font-sans uppercase">
                 Aparts & Spa
               </span>

@@ -32,8 +32,8 @@ async function main() {
   const categoriesData = [
     {
       slug: 'classic',
-      name: 'Departamento Classic',
-      description: 'Amplio departamento de 2 ambientes con vista al jardín y equipamiento completo.',
+      name: 'Apart Classic',
+      description: 'Amplio apart de 2 ambientes con vista al jardín y equipamiento completo.',
       capacityAdults: 2,
       capacityChildren: 2,
       maxOccupancy: 4,
@@ -44,7 +44,7 @@ async function main() {
     },
     {
       slug: 'superior',
-      name: 'Departamento Superior',
+      name: 'Apart Superior',
       description: 'Comodidad superior con balcón privado, parrilla individual y espacios amplios.',
       capacityAdults: 4,
       capacityChildren: 2,
@@ -56,7 +56,7 @@ async function main() {
     },
     {
       slug: 'de-luxe',
-      name: 'Departamento De Luxe',
+      name: 'Apart De Luxe',
       description: 'Nuestra suite más exclusiva con hidromasaje, terraza panorámica y servicios premium.',
       capacityAdults: 2,
       capacityChildren: 1,

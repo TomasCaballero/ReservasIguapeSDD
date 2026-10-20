@@ -29,7 +29,7 @@ Todos los endpoints públicos responden con formato JSON, cabeceras de no-cache 
         {
           "id": "uuid-cat-1",
           "slug": "classic",
-          "name": "Departamento Classic",
+          "name": "Apart Classic",
           "description": "2 ambientes con vista al jardín...",
           "maxOccupancy": 4,
           "capacityAdults": 3,

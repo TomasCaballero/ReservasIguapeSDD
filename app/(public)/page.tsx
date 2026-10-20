@@ -194,22 +194,20 @@ export default function PublicBookingPage() {
               <button
                 type="button"
                 onClick={() => setCurrency('ARS')}
-                className={`py-2 text-xs font-bold transition-colors ${
-                  currency === 'ARS'
+                className={`py-2 text-xs font-bold transition-colors ${currency === 'ARS'
                     ? 'bg-[#E6EF73] text-[#1E2B18]'
                     : 'bg-[#2B3D24] text-[#E4E2C5] hover:bg-[#2B3D24]/80'
-                }`}
+                  }`}
               >
                 ARS ($)
               </button>
               <button
                 type="button"
                 onClick={() => setCurrency('USD')}
-                className={`py-2 text-xs font-bold transition-colors ${
-                  currency === 'USD'
+                className={`py-2 text-xs font-bold transition-colors ${currency === 'USD'
                     ? 'bg-[#E6EF73] text-[#1E2B18]'
                     : 'bg-[#2B3D24] text-[#E4E2C5] hover:bg-[#2B3D24]/80'
-                }`}
+                  }`}
               >
                 USD (U$S)
               </button>
@@ -239,7 +237,7 @@ export default function PublicBookingPage() {
       <section className="space-y-6">
         <div className="flex items-center justify-between border-b border-[#AD9C78]/30 pb-3">
           <h2 className="font-display text-2xl text-[#E6EF73]">
-            {hasSearched ? 'Opciones Disponibles' : 'Nuestros Departamentos'}
+            {hasSearched ? 'Opciones Disponibles' : 'Nuestros Aparts'}
           </h2>
           {hasSearched && (
             <span className="text-sm text-[#E4E2C5]/80">

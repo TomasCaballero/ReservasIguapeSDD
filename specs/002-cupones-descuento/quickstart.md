@@ -19,7 +19,7 @@ Guía rápida para verificar la funcionalidad de cupones de descuento y defensas
 
 ## 2. Escenario B: Validación y Reserva en Soft Lock (Portal Público)
 1. Abrir una ventana de incógnito en `http://localhost:7777/`.
-2. Cotizar una estadía de 4 noches para 2 adultos en "Departamento Classic".
+2. Cotizar una estadía de 4 noches para 2 adultos en "Apart Classic".
 3. Avanzar al formulario de datos (Paso 2).
 4. En el campo "Cupón de Descuento", escribir `desc15` (minúsculas):
    - El sistema normaliza a `DESC15` y aplica el 15% sobre el subtotal.

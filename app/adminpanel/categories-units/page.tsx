@@ -18,14 +18,14 @@ export default async function CategoriesUnitsPage() {
       <div className="border-b border-[#AD9C78]/30 pb-4">
         <h1 className="font-display text-3xl text-[#E6EF73]">Inventario: Categorías y Unidades</h1>
         <p className="text-sm text-[#E4E2C5]/70">
-          Administrá las tipologías de departamentos y las unidades físicas del complejo.
+          Administrá las tipologías de aparts y las unidades físicas del complejo.
         </p>
       </div>
 
       {/* Categories Section */}
       <section className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="font-display text-2xl text-[#E4E2C5]">Categorías de Departamentos</h2>
+          <h2 className="font-display text-2xl text-[#E4E2C5]">Categorías de Aparts</h2>
         </div>
 
         <div className="bg-[#2B3D24] border border-[#AD9C78]/30 overflow-x-auto">

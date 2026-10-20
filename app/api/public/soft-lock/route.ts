@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
   } catch (err: any) {
     if (err.message.includes('No units available')) {
       return NextResponse.json(
-        { error: 'No hay departamentos disponibles en esta categoría para las fechas seleccionadas.' },
+        { error: 'No hay aparts disponibles en esta categoría para las fechas seleccionadas.' },
         { status: 409 },
       );
     }
